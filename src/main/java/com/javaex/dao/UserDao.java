@@ -27,5 +27,19 @@ public class UserDao {
 				
 		return sqlSession.selectOne("user.selectUser", userVo);
 	}
+	
+	//수정폼 --> 회원정보 1명 가져오기
+	public UserVo selectOne(int no) {
+		System.out.println("dao --> modifyForm -- no :" + no);
+				
+		return sqlSession.selectOne("user.selectOne", no);
+	}
+	
+	//수정
+	public void modify(UserVo userVo) {
+		System.out.println("dao --> modify -- userVo :" + userVo);
+		
+		sqlSession.update("user.modify", userVo);
+	}
 
 }

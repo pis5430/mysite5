@@ -17,6 +17,7 @@
 	
 	</insert>
 	
+	<!-- 로그인 -->
 	<select id="selectUser" parameterType="com.javaex.vo.UserVo" resultType="com.javaex.vo.UserVo">
 		<![CDATA[
 			select no,
@@ -26,6 +27,30 @@
 			and password=#{password}
 		]]>	
 	</select>
+	
+	
+	<!-- 수정폼 -->
+	<select id="selectOne" parameterType="int" resultType="com.javaex.vo.UserVo">
+		<![CDATA[
+			select id,
+			       name,
+			       password,
+			       gender
+			from users
+			where no=#{no}
+		]]>	
+	</select>
+	
+	<!-- 회원정보 수정 -->
+	<update id="modify" parameterType="com.javaex.vo.UserVo">
+		<![CDATA[
+			update users
+			set password=#{password},
+			    name=#{name},
+			    gender=#{gender}
+			where no=#{no}
+		]]>	
+	</update>
 	
 
 </mapper>
