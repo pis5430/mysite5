@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.javaex.dao.UserDao;
+import com.javaex.service.UserService;
 import com.javaex.vo.UserVo;
 
 @Controller
@@ -17,7 +18,10 @@ import com.javaex.vo.UserVo;
 public class UserController {
 	//필드
 	@Autowired
-	private UserDao userDao;
+	private UserDao userDao; //원래는 다오에게 직접 일시키면 안됨 
+	
+	@Autowired
+	private UserService userService;
 	
 	
 	
@@ -43,8 +47,7 @@ public class UserController {
 		System.out.println("/user/join");
 		System.out.println(userVo);
 		
-		int count = userDao.insert(userVo);
-		System.out.println("userController count :" +count);
+		int count = userService.join(userVo);// dao에 바로 연결하지 않고 서비스로
 		
 		//회원가입 성공, 실패여부 if문
 		
@@ -65,7 +68,7 @@ public class UserController {
 		System.out.println("/user/login");		
 		System.out.println("login userVo : "+userVo);
 		
-		UserVo authUser = userDao.selectUser(userVo); //id, password값으로 해당 no,name 불러옴
+		UserVo authUser = userService.login(userVo);
 		//System.out.println("controller-->" + authUser.toString());
 		
 		if(authUser == null) {//실패했을때
@@ -99,6 +102,9 @@ public class UserController {
 		
 		//세션에 있는 authUser에서 no값을 가져와서 한명의 정보를 불러와야함(id,name,password)
 		UserVo authVo = (UserVo)session.getAttribute("authUser"); //no값이랑 name값을 가지고있음				
+		//-- 수업중 코드
+		//int no =((UserVo)session.getAttribute("authUser")).getNo();
+		//UserVo userVo = userDao.serltUser(no);
 		
 		//데이터 보내줌 --> modifyForm 파일 착각해서 시간을 너무 많이 씀...
 		model.addAttribute("userVo",userDao.selectOne(authVo.getNo()));	
@@ -111,8 +117,14 @@ public class UserController {
 	public String modify(@ModelAttribute UserVo userVo, HttpSession session) {
 		System.out.println("/user/modify");
 		
-		userDao.modify(userVo);//수정
-		System.out.println("modify controller userVo :" + userVo);
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		int no = authUser.getNo();
+		userVo.setNo(no); //no값을 안보내줘서 수정이 안됬었음
+		
+		//userDao.update(userVo);//수정
+		//System.out.println("modify controller userVo :" + userVo);
+		
+		int count = userService.modify(userVo);		
 		
 		//수정된 값을 다른곳에도 불러와야함 (이름)
 		//세션에 저장된 authUser값을 불러와서 이름만 변경

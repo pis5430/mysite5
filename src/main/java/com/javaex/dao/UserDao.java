@@ -36,10 +36,10 @@ public class UserDao {
 	}
 	
 	//수정
-	public void modify(UserVo userVo) {
-		System.out.println("dao --> modify -- userVo :" + userVo);
+	public int modify(UserVo userVo) {
+		System.out.println("dao --> update -- userVo :" + userVo);
 		
-		sqlSession.update("user.modify", userVo);
+		return sqlSession.update("user.update", userVo);
 	}
 
 }
