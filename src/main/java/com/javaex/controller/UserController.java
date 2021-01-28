@@ -17,13 +17,11 @@ import com.javaex.vo.UserVo;
 @RequestMapping(value="/user")
 public class UserController {
 	//필드
-	@Autowired
-	private UserDao userDao; //원래는 다오에게 직접 일시키면 안됨 
+	//@Autowired
+	//private UserDao userDao; //원래는 다오에게 직접 일시키면 안됨 
 	
 	@Autowired
 	private UserService userService;
-	
-	
 	
 	//생성자
 	
@@ -107,7 +105,7 @@ public class UserController {
 		//UserVo userVo = userDao.serltUser(no);
 		
 		//데이터 보내줌 --> modifyForm 파일 착각해서 시간을 너무 많이 씀...
-		model.addAttribute("userVo",userDao.selectOne(authVo.getNo()));	
+		model.addAttribute("userVo",userService.modifyForm(authVo.getNo()));	
 		
 		return "user/modifyForm";
 	}
