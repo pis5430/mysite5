@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+	<!-- 회원가입(회원가입 정보 등록) -->
+	<select id="boardList" resultType="com.javaex.vo.BoardVo">
+		<![CDATA[
+			select b.no,
+			       b.title,
+			       u.name,
+			       b.content,
+			       b.hit,
+			       to_char(b.reg_date,'YYYY-MM-DD HH24:MI') "date",
+			       b.user_no
+			from board b , users u
+			where b.user_no = u.no
+			order by b.reg_date desc
+		]]>
+	</select>
+	
+	<insert id="boardInsert" parameterType="com.javaex.vo.BoardVo">
+		<![CDATA[
+			insert into board
+			values (seq_board_no.nextval, 
+					#{title},
+					#{content}, 
+					0, 
+					sysdate,
+					#{user_no})
+		]]>
+	</insert>
+
+
+</mapper>

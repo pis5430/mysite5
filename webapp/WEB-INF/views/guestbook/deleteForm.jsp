@@ -63,6 +63,7 @@
 			<!-- //guestbook -->
 		</div>
 		<!-- //content  -->
+		<div class="clear"></div>
 		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 		<!-- //footer -->
 
