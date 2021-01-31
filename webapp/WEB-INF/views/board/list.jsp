@@ -74,7 +74,7 @@
 								<td>
 									<!-- 로그인시에만 보이도록 session에 올라가있는 authUser.no값과 vo.user_no비교-->
 										<c:if test="${authUser.no == vo.user_no}">
-						                 	<a href="${pageContext.request.contextPath}/board/delete?no=${vo.no}">[삭제]</a>
+						                 	<a href="${pageContext.request.contextPath}/board/remove?no=${vo.no}">[삭제]</a>
 										</c:if>
 									
 								</td>

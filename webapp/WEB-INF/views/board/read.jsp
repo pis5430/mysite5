@@ -45,36 +45,36 @@
 
 			<div id="board">
 				<div id="read">
-					<form action="#" method="get">
+					<form action="${pageContext.request.contextPath}/board/modify" method="get">
 						<!-- 작성자 -->
 						<div class="form-group">
-							<span class="form-text">작성자</span> <span class="form-value">정우성</span>
+							<span class="form-text">작성자</span> <span class="form-value">${boardOne.name}</span>
 						</div>
 
 						<!-- 조회수 -->
 						<div class="form-group">
-							<span class="form-text">조회수</span> <span class="form-value">123</span>
+							<span class="form-text">조회수</span> <span class="form-value">${boardOne.hit}</span>
 						</div>
 
 						<!-- 작성일 -->
 						<div class="form-group">
-							<span class="form-text">작성일</span> <span class="form-value">2020-03-02</span>
+							<span class="form-text">작성일</span> <span class="form-value">${boardOne.date}</span>
 						</div>
 
 						<!-- 제목 -->
 						<div class="form-group">
-							<span class="form-text">제 목</span> <span class="form-value">여기에는 글제목이 출력됩니다.</span>
+							<span class="form-text">제 목</span> <span class="form-value">${boardOne.title}</span>
 						</div>
 
 						<!-- 내용 -->
 						<div id="txt-content">
-							<span class="form-value"> 여기에는 본문내용이 출력됩니다.<br> 여기에는 본문내용이 출력됩니다.<br> 여기에는 본문내용이 출력됩니다.<br> 여기에는 본문내용이 출력됩니다.<br>
-								여기에는 본문내용이 출력됩니다.<br> 여기에는 본문내용이 출력됩니다.<br> 여기에는 본문내용이 출력됩니다.<br> 여기에는 본문내용이 출력됩니다.<br>
-							</span>
+							<span class="form-value">${boardOne.content}</span>
 						</div>
-
-						<a id="btn_modify" href="">수정</a> <a id="btn_modify" href="">목록</a>
-
+						<!-- 수정 버튼이 작성한 사람에게만 보이도록 -->
+						<c:if test="${authUser.no == boardOne.user_no}">
+							<a id="btn_modify" href="${pageContext.request.contextPath}/board/modifyForm?no=${boardOne.no}">수정</a>
+						</c:if>
+						<a id="btn_modify" href="${pageContext.request.contextPath}/board/list">목록</a>
 					</form>
 					<!-- //form -->
 				</div>

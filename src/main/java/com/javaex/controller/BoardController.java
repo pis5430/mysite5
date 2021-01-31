@@ -10,10 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.BoardService;
 import com.javaex.vo.BoardVo;
-import com.javaex.vo.UserVo;
 
 @Controller
 @RequestMapping(value="/board")
@@ -53,13 +53,15 @@ public class BoardController {
 	//글쓰기(insert기능)
 	@RequestMapping(value="/write", method= {RequestMethod.GET ,RequestMethod.POST})
 	public String write(@ModelAttribute BoardVo boardVo,HttpSession session) {
-		System.out.println("컨트롤러 write");
+		System.out.println("컨트롤러 write --> boardVo : " + boardVo);
 		
+		/*
+		이런 값들은 service에서 해주는게 좋은지?(이동)
 		int no = ((UserVo)session.getAttribute("authUser")).getNo();		
 		boardVo.setUser_no(no);
 		
-		System.out.println("no값이 잘 들어갔는지 확인"+boardVo);
-		
+		System.out.println("user_no값이 잘 들어갔는지 확인"+boardVo);
+		*/
 		
 		boardService.write(boardVo);
 								
@@ -71,20 +73,49 @@ public class BoardController {
 	
 	//게시판 읽기
 	@RequestMapping(value="/read", method= {RequestMethod.GET ,RequestMethod.POST})
-	public String read() {
+	public String read(@RequestParam("no") int no,
+						Model model) {
 		System.out.println("컨트롤러 read");
+		//게시물 정보 받아옴
 		
+		model.addAttribute("boardOne", boardService.read(no));
 		
 		return "board/read";
 	}
 	
 	//수정폼
 	@RequestMapping(value="/modifyForm", method= {RequestMethod.GET ,RequestMethod.POST})
-	public String modifyForm() {
+	public String modifyForm(@RequestParam("no") int no,
+							Model model) {
 		System.out.println("컨트롤러 modifyForm");
 		
 		
+		model.addAttribute("boardOne", boardService.read(no));
+		
 		return "board/modifyForm";
+	}
+	
+	//수정
+	@RequestMapping(value="/modify", method= {RequestMethod.GET ,RequestMethod.POST})
+	public String modify(@ModelAttribute BoardVo boardVo) {
+		System.out.println("컨트롤러 modify");
+		System.out.println(boardVo);
+		
+		boardService.modify(boardVo);
+		
+		
+		return "redirect:/board/list";
+	}
+	
+	//삭제
+	@RequestMapping(value="/remove", method= {RequestMethod.GET ,RequestMethod.POST})
+	public String remove(int no) {
+		System.out.println("컨트롤러 remove");
+		
+		boardService.remove(no);
+		
+		
+		return "redirect:/board/list";
 	}
 	
 	

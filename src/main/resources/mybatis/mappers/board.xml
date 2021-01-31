@@ -4,7 +4,7 @@
 <mapper namespace="board">
 
 	<!-- 회원가입(회원가입 정보 등록) -->
-	<select id="boardList" resultType="com.javaex.vo.BoardVo">
+	<select id="boardList" resultType="BoardVo">
 		<![CDATA[
 			select b.no,
 			       b.title,
@@ -19,7 +19,7 @@
 		]]>
 	</select>
 	
-	<insert id="boardInsert" parameterType="com.javaex.vo.BoardVo">
+	<insert id="boardInsert" parameterType="BoardVo">
 		<![CDATA[
 			insert into board
 			values (seq_board_no.nextval, 
@@ -30,6 +30,51 @@
 					#{user_no})
 		]]>
 	</insert>
+	
+	<delete id="boardDelete" parameterType="int"> 
+		<![CDATA[
+			delete from board
+			where no = #{no}	
+		]]>
+	</delete>
+	
+	<!-- 글읽기 -->
+	<select id="boardOne" parameterType="int" resultType="BoardVo">
+		<![CDATA[
+			select b.no,
+			       b.title,
+			       u.name,
+			       b.content,
+			       b.hit,
+			       to_char(b.reg_date,'YYYY-MM-DD HH24:MI') "date",
+			       b.user_no
+			from board b , users u
+			where b.user_no = u.no
+			and b.no = #{no}
+		]]>
+	</select>
+	
+	<!-- 조회수 올리기 -->
+	<update id="hitUpdate" parameterType="int"> 
+		<![CDATA[
+			update board
+			set hit = hit+1
+			where no = #{no}	
+		]]>
+	</update>	
+	
+	<!-- 게시물 수정 -->
+	<update id="boardUpdate" parameterType="BoardVo"> 
+		<![CDATA[
+			update board
+			set title = #{title},
+				content = #{content}
+			where no = #{no}
+		]]>
+	</update>	
+	
+	
+	
 
 
 </mapper>
