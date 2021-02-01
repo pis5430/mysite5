@@ -18,9 +18,6 @@ public class BoardService {
 	@Autowired
 	private BoardDao boardDao;
 	
-	@Autowired
-	private HttpSession session; 
-	//no값을 불러오기 위해 
 	
 	//게시판 리스트
 	public List<BoardVo> boardList(){
@@ -33,10 +30,6 @@ public class BoardService {
 	public int write(BoardVo boardVo) {
 		System.out.println("Service write");	
 		
-		int no = ((UserVo)session.getAttribute("authUser")).getNo();		
-		boardVo.setUser_no(no);
-		
-		System.out.println("user_no값이 잘 들어갔는지 확인"+boardVo);
 		
 		return boardDao.boardInsert(boardVo);
 	}
@@ -59,8 +52,16 @@ public class BoardService {
 		boardDao.boardHit(no); //무조건 조회수가 올라감..
 		
 		return boardDao.boardOne(no);
-
 	}
+	
+	//게시글 수정 불러오기
+	public BoardVo modifyRead(int no) {
+		System.out.println("Service read");	
+		
+		return boardDao.boardOne(no);
+	}
+	
+	
 	
 	//수정폼
 	public BoardVo modifyForm(int no) {

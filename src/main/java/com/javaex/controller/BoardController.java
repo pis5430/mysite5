@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.BoardService;
 import com.javaex.vo.BoardVo;
+import com.javaex.vo.UserVo;
 
 @Controller
 @RequestMapping(value="/board")
@@ -55,13 +56,12 @@ public class BoardController {
 	public String write(@ModelAttribute BoardVo boardVo,HttpSession session) {
 		System.out.println("컨트롤러 write --> boardVo : " + boardVo);
 		
-		/*
-		이런 값들은 service에서 해주는게 좋은지?(이동)
-		int no = ((UserVo)session.getAttribute("authUser")).getNo();		
-		boardVo.setUser_no(no);
 		
+		//session은 웹의 개념이라서 controller까지 범위에서 사용하는편이 좋음
+		int no = ((UserVo)session.getAttribute("authUser")).getNo();		
+		boardVo.setUser_no(no);		
 		System.out.println("user_no값이 잘 들어갔는지 확인"+boardVo);
-		*/
+		
 		
 		boardService.write(boardVo);
 								
@@ -90,7 +90,7 @@ public class BoardController {
 		System.out.println("컨트롤러 modifyForm");
 		
 		
-		model.addAttribute("boardOne", boardService.read(no));
+		model.addAttribute("boardOne", boardService.modifyRead(no));
 		
 		return "board/modifyForm";
 	}
