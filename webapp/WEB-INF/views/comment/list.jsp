@@ -60,24 +60,33 @@
 								<th>조회수</th>
 								<th>작성일</th>
 								<th>관리</th>
+								<th>group_no</th>
+								<th>order_no</th>
+								<th>depth</th>
+								
 							</tr>
 						</thead>
 						<tbody>
 							<!-- 반복문 처리  -->
-						<c:forEach items="${bList}" var="vo">
+						<c:forEach items="${cList}" var="vo">
 							<tr>
 								<td>${vo.no}</td>
-								<td class="text-left"><a href="${pageContext.request.contextPath}/board/read?no=${vo.no}">${vo.title}</a></td>
+								<td class="text-left">
+									<a href="${pageContext.request.contextPath}/comment/read?no=${vo.no}">${vo.title}</a>									
+								</td>
 								<td>${vo.name}</td>
 								<td>${vo.hit}</td>
-								<td>${vo.date}</td>
+								<td>${vo.reg_date}</td>
 								<td>
 									<!-- 로그인시에만 보이도록 session에 올라가있는 authUser.no값과 vo.user_no비교-->
 										<c:if test="${authUser.no == vo.user_no}">
-						                 	<a href="${pageContext.request.contextPath}/board/remove?no=${vo.no}">[삭제]</a>
+						                 	<a href="${pageContext.request.contextPath}/comment/remove?no=${vo.no}">[삭제]</a>
 										</c:if>
 									
 								</td>
+								<td>${vo.group_no} </td>
+								<td>${vo.order_no}</td>
+								<td>${vo.depth}</td>
 							</tr>
 						</c:forEach>
 						<!-- /반복문처리 -->
@@ -105,7 +114,7 @@
 					</div>
 					<!-- 로그인 시에만 보이도록 -->
 					<c:if test="${!empty sessionScope.authUser}">
-						<a id="btn_write" href="${pageContext.request.contextPath}/board/writeForm">글쓰기</a>
+						<a id="btn_write" href="${pageContext.request.contextPath}/comment/writeForm">글쓰기</a>
 					</c:if>
 				</div>
 				<!-- //list -->

@@ -3,12 +3,14 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias alias="BoardVo" type="com.javaex.vo.BoardVo" />		
+		<typeAlias alias="BoardVo" type="com.javaex.vo.BoardVo" />	
+		<typeAlias alias="CommentVo" type="com.javaex.vo.CommentVo" />		
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="mybatis/mappers/user.xml" />
 		<mapper resource="mybatis/mappers/guest.xml" />
 		<mapper resource="mybatis/mappers/board.xml" />
+		<mapper resource="mybatis/mappers/comment.xml" />
 	</mappers>
 </configuration>
