@@ -34,7 +34,7 @@ public class CommentService {
 	public int commentWrite(CommentVo commentVo) {
 		System.out.println("Service commentowrite");	
 		
-		
+		commentDao.orderNoUpdate(commentVo); //order_no만 증가시킬 목적
 		return commentDao.commentTowInsert(commentVo);
 	}
 	

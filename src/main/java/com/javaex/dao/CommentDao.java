@@ -63,5 +63,12 @@ public class CommentDao {
 		
 		 sqlSession.update("comment.commentUpdate",commentVo);
 	}
+	
+	//order_no 올리기
+	public void orderNoUpdate(CommentVo commentVo) {
+		System.out.println("dao orderNoUpdate commentVo :"+commentVo);
+		
+		 sqlSession.update("comment.orderNoUpdate",commentVo);
+	}
 
 }

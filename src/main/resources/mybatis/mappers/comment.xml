@@ -54,7 +54,22 @@
 		]]>
 	</insert>
 	
-		<!-- 글읽기 -->
+		
+	<!-- order_no 올리기 / group_no가 대상과 같고 
+	ㅡ order_no가 대상과 같거나 큰경우 +1씩 더해준다  -->
+	<update id="orderNoUpdate" parameterType="CommentVo">
+		<![CDATA[
+			update rboard
+			set order_no = order_no + 1
+			where group_no = #{group_no}
+			and order_no > #{order_no}
+		]]>
+	</update>
+	
+	
+	
+	
+	<!-- 글읽기 -->
 	<select id="commentOne" parameterType="int" resultType="CommentVo">
 		<![CDATA[
 			select r.no,
