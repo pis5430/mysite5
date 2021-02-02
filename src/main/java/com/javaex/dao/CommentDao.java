@@ -16,7 +16,7 @@ public class CommentDao {
 	private SqlSession sqlSession;
 	
 	//게시판 리스트 가져오기
-	public List<CommentVo>  cBoardList() {
+	public List<CommentVo>  commentList() {
 			
 		System.out.println("dao commentList");
 		return sqlSession.selectList("comment.commentList");		

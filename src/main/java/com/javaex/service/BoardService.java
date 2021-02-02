@@ -60,17 +60,8 @@ public class BoardService {
 		
 		return boardDao.boardOne(no);
 	}
-	
-	
-	
-	//수정폼
-	public BoardVo modifyForm(int no) {
-		System.out.println("Service modifyForm");	
-		
-		return boardDao.boardOne(no);
+			
 
-	}
-	
 	//수정
 	public void modify(BoardVo boardVo) {
 		System.out.println("Service modifyForm");	

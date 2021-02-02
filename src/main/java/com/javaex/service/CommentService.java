@@ -16,10 +16,10 @@ public class CommentService {
 	private CommentDao commentDao;
 	
 	//게시판 리스트
-	public List<CommentVo> cBoardList(){
-		System.out.println("Service CommentList");
+	public List<CommentVo> commentList(){
+		System.out.println("Service commentList");
 			
-		return commentDao.cBoardList();
+		return commentDao.commentList();
 	}
 	
 	//write(게시판 글 등록)
@@ -39,7 +39,7 @@ public class CommentService {
 	}
 	
 	//삭제
-	public int commentRemove(int no) {
+	public int remove(int no) {
 		System.out.println("Service commentRemove");	
 				
 		return commentDao.commentDelete(no);

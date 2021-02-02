@@ -56,7 +56,7 @@
 	
 		
 	<!-- order_no 올리기 / group_no가 대상과 같고 
-	ㅡ order_no가 대상과 같거나 큰경우 +1씩 더해준다  -->
+	ㅡ order_no가 대상보다  큰경우 +1씩 더해준다  -->
 	<update id="orderNoUpdate" parameterType="CommentVo">
 		<![CDATA[
 			update rboard

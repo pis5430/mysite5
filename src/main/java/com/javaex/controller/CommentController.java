@@ -30,11 +30,11 @@ public class CommentController {
 	public String list(Model model) {
 		System.out.println("컨트롤러 commentlist");
 		
-		List<CommentVo> cBoardList = commentService.cBoardList();
-		System.out.println(cBoardList);
+		List<CommentVo> commentList = commentService.commentList();
+		System.out.println(commentList);
 		
 		//데이터 보내기
-		model.addAttribute("cList", cBoardList);
+		model.addAttribute("cList", commentList);
 		
 		return "comment/list";
 	}
@@ -61,14 +61,14 @@ public class CommentController {
 	//새글쓰기
 	@RequestMapping(value="/write", method= {RequestMethod.GET ,RequestMethod.POST})
 	public String write(@ModelAttribute CommentVo commentVo,HttpSession session) {
-		System.out.println("컨트롤러 write --> boardVo : " + commentVo);
+		System.out.println("컨트롤러 write --> commentVo : " + commentVo);
 		
 		
 		//session은 웹의 개념이라서 controller까지 범위에서 사용하는편이 좋음
 		int no = ((UserVo)session.getAttribute("authUser")).getNo();		
 		commentVo.setUser_no(no);		
 		System.out.println("user_no값이 잘 들어갔는지 확인"+commentVo);
-		
+
 		
 		commentService.write(commentVo);
 								
@@ -87,8 +87,6 @@ public class CommentController {
 		commentVo.setUser_no(no);		
 		System.out.println("user_no값이 잘 들어갔는지 확인"+commentVo);
 		
-		//부모의 정보를 가져와야함? group_no, order_no , depth
-		
 		
 		System.out.println(commentVo);
 		
@@ -104,7 +102,7 @@ public class CommentController {
 	public String remove(int no) {
 		System.out.println("컨트롤러 remove");
 		
-		commentService.commentRemove(no);
+		commentService.remove(no);
 		
 		
 		return "redirect:/comment/list";
