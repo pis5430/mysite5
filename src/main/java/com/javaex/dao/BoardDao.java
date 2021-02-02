@@ -37,7 +37,7 @@ public class BoardDao {
 	
 	//게시글 읽기
 	public BoardVo boardOne(int no) {
-		System.out.println("dao boardDelete no :"+no);
+		System.out.println("dao boardOne no :"+no);
 		
 		return sqlSession.selectOne("board.boardOne",no);
 	}

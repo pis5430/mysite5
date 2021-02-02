@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.CommentService;
 import com.javaex.vo.BoardVo;
@@ -64,6 +65,29 @@ public class CommentController {
 								
 		return "redirect:/comment/list";
 
+	}
+	
+	//삭제
+	@RequestMapping(value="/remove", method= {RequestMethod.GET ,RequestMethod.POST})
+	public String remove(int no) {
+		System.out.println("컨트롤러 remove");
+		
+		commentService.commentRemove(no);
+		
+		
+		return "redirect:/comment/list";
+	}
+	
+	//댓글 읽기
+	@RequestMapping(value="/read", method= {RequestMethod.GET ,RequestMethod.POST})
+	public String read(@RequestParam("no") int no,
+						Model model) {
+		System.out.println("컨트롤러 read");
+		//게시물 정보 받아옴
+		
+		model.addAttribute("commentOne", commentService.read(no));
+		
+		return "comment/read";
 	}
 		
 

@@ -72,7 +72,17 @@
 							<tr>
 								<td>${vo.no}</td>
 								<td class="text-left">
-									<a href="${pageContext.request.contextPath}/comment/read?no=${vo.no}">${vo.title}</a>									
+									<a href="${pageContext.request.contextPath}/comment/read?no=${vo.no}">
+									<c:if test="${vo.depth == 0}">
+									${vo.title}
+									</c:if>
+									<c:if test="${vo.depth == 1}">
+									&emsp;&emsp;${vo.title}
+									</c:if>
+									<c:if test="${vo.depth == 2}">
+									&emsp;&emsp;&emsp;&emsp;${vo.title}
+									</c:if>
+									</a>									
 								</td>
 								<td>${vo.name}</td>
 								<td>${vo.hit}</td>

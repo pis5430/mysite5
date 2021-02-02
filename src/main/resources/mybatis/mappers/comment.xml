@@ -18,11 +18,11 @@
        			   r.depth
 			from rboard r , users u
 			where r.user_no = u.no
-			order by r.reg_date desc
+			order by r.group_no desc, r.order_no asc
 		]]>
 	</select>
 
-	<!-- 첫번째 댓글 시도 / 시퀀스 번호를 그룹 no로 넣어줘야함 -->
+	<!-- 첫번째 댓글 시도 / 시퀀스 번호를 그룹 no로 넣어줘야함, order_no는 무조건1로 시작 depth는  0-->
 	<insert id="firstCommentInsert" parameterType="CommentVo">
 		<![CDATA[
 			insert into rboard
@@ -32,12 +32,13 @@
 					#{content},
 					0, 
 					sysdate,
-					#{no},
+					seq_rboard_no.nextval,
 					1,
 					0)
 		]]>
 	</insert>
 	
+	<!-- 댓글달기 -->
 	<insert id="secondCommentInsert" parameterType="CommentVo">
 		<![CDATA[
 			insert into rboard
@@ -52,6 +53,39 @@
 					0)
 		]]>
 	</insert>
+	
+		<!-- 글읽기 -->
+	<select id="commentOne" parameterType="int" resultType="CommentVo">
+		<![CDATA[
+			select r.no,
+			       r.title,
+			       u.name,
+			       r.content,
+			       r.hit,
+			       to_char(r.reg_date,'YYYY-MM-DD HH24:MI') "reg_date",
+			       r.user_no
+			from rboard r , users u
+			where r.user_no = u.no
+			and r.no = #{no}
+		]]>
+	</select>
+	
+	<!-- 조회수 올리기 -->
+	<update id="commentHitUpdate" parameterType="int"> 
+		<![CDATA[
+			update rboard
+			set hit = hit+1
+			where no = #{no}	
+		]]>
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="commentDelete" parameterType="int"> 
+		<![CDATA[
+			delete from rboard
+			where no = #{no}	
+		]]>
+	</delete>
 
 
 </mapper>

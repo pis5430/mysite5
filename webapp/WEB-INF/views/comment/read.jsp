@@ -48,33 +48,40 @@
 					<form action="${pageContext.request.contextPath}/comment/modify" method="get">
 						<!-- 작성자 -->
 						<div class="form-group">
-							<span class="form-text">작성자</span> <span class="form-value">${boardOne.name}</span>
+							<span class="form-text">작성자</span> <span class="form-value">${commentOne.name}</span>
 						</div>
 
 						<!-- 조회수 -->
 						<div class="form-group">
-							<span class="form-text">조회수</span> <span class="form-value">${boardOne.hit}</span>
+							<span class="form-text">조회수</span> <span class="form-value">${commentOne.hit}</span>
 						</div>
 
 						<!-- 작성일 -->
 						<div class="form-group">
-							<span class="form-text">작성일</span> <span class="form-value">${boardOne.date}</span>
+							<span class="form-text">작성일</span> <span class="form-value">${commentOne.reg_date}</span>
 						</div>
 
 						<!-- 제목 -->
 						<div class="form-group">
-							<span class="form-text">제 목</span> <span class="form-value">${boardOne.title}</span>
+							<span class="form-text">제 목</span> <span class="form-value">${commentOne.title}</span>
 						</div>
 
 						<!-- 내용 -->
 						<div id="txt-content">
-							<span class="form-value">${boardOne.content}</span>
+							<span class="form-value">${commentOne.content}</span>
 						</div>
 						<!-- 수정 버튼이 작성한 사람에게만 보이도록 -->
-						<c:if test="${authUser.no == boardOne.user_no}">
-							<a id="btn_modify" href="${pageContext.request.contextPath}/board/modifyForm?no=${boardOne.no}">수정</a>
+						<c:if test="${authUser.no == commentOne.user_no}">
+							<a id="btn_modify" href="${pageContext.request.contextPath}/comment/modifyForm?no=${commentOne.no}">수정</a>
 						</c:if>
-						<a id="btn_modify" href="${pageContext.request.contextPath}/board/list">목록</a>
+						
+						<!-- 목록버튼 -->
+						<a id="btn_modify" href="${pageContext.request.contextPath}/comment/list">목록</a>
+						
+						<!-- 로그인 시에만 보이도록 댓글달기 버튼(첫번째 댓글이 아닌 두번째부터의 댓글) -->
+						<c:if test="${!empty sessionScope.authUser}">
+							<a id="btn_modify" href="${pageContext.request.contextPath}/comment/writeForm">글쓰기</a>
+						</c:if>
 					</form>
 					<!-- //form -->
 				</div>

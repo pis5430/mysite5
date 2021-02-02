@@ -30,6 +30,22 @@ public class CommentService {
 		return commentDao.commentInsert(commentVo);
 	}
 	
+	//삭제
+	public int commentRemove(int no) {
+		System.out.println("Service commentRemove");	
+				
+		return commentDao.commentDelete(no);
+	}	
+	
+	//게시글 읽기
+	public CommentVo read(int no) {
+		System.out.println("Service read");	
+
+		commentDao.commentHit(no); //무조건 조회수가 올라감..
+		
+		return commentDao.commentOne(no);
+	}
+	
 	
 
 }

@@ -22,11 +22,32 @@ public class CommentDao {
 		return sqlSession.selectList("comment.commentList");		
 	}
 	
-	//게시글 등록
+	//댓글 등록(1)
 	public int commentInsert(CommentVo commentVo) {
 		System.out.println("dao commentInsert commentVo :"+commentVo );
 		
 		return sqlSession.insert("comment.firstCommentInsert",commentVo);
+	}
+	
+	//댓글 삭제
+	public int commentDelete(int no) {
+		System.out.println("dao commentDelete no :"+no);
+		
+		return sqlSession.delete("comment.commentDelete",no);
+	}
+	
+	//댓글 읽기
+	public CommentVo commentOne(int no) {
+		System.out.println("dao commentOne no :"+no);
+		
+		return sqlSession.selectOne("comment.commentOne",no);
+	}
+	
+	//조회수 올리기
+	public int commentHit(int no) {
+		System.out.println("dao commentHit no :"+no);
+		
+		return sqlSession.update("comment.commentHitUpdate",no);
 	}
 
 }
