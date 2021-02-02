@@ -22,11 +22,18 @@ public class CommentDao {
 		return sqlSession.selectList("comment.commentList");		
 	}
 	
-	//댓글 등록(1)
+	//게시글 등록
 	public int commentInsert(CommentVo commentVo) {
 		System.out.println("dao commentInsert commentVo :"+commentVo );
 		
 		return sqlSession.insert("comment.firstCommentInsert",commentVo);
+	}
+	
+	//댓글 등록
+	public int commentTowInsert(CommentVo commentVo) {
+		System.out.println("dao commentTwoInsert commentVo :"+commentVo );
+		
+		return sqlSession.insert("comment.secondCommentInsert",commentVo);
 	}
 	
 	//댓글 삭제

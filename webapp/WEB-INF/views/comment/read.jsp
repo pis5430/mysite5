@@ -80,7 +80,7 @@
 						
 						<!-- 로그인 시에만 보이도록 댓글달기 버튼(첫번째 댓글이 아닌 두번째부터의 댓글) -->
 						<c:if test="${!empty sessionScope.authUser}">
-							<a id="btn_modify" href="${pageContext.request.contextPath}/comment/writeForm">글쓰기</a>
+							<a id="btn_modify" href="${pageContext.request.contextPath}/comment/commentForm?group_no=${commentOne.group_no}?&depth=${commentOne.depth + 1}">댓글달기</a>
 						</c:if>
 					</form>
 					<!-- //form -->

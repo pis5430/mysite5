@@ -67,6 +67,29 @@ public class CommentController {
 
 	}
 	
+	//댓글쓰기
+	@RequestMapping(value="/commentWrite", method= {RequestMethod.GET ,RequestMethod.POST})
+	public String commentWrite(@ModelAttribute CommentVo commentVo,HttpSession session) {
+		System.out.println("컨트롤러 commentWrite --> commentVo : " + commentVo);
+		
+		
+		//session은 웹의 개념이라서 controller까지 범위에서 사용하는편이 좋음
+		int no = ((UserVo)session.getAttribute("authUser")).getNo();		
+		commentVo.setUser_no(no);		
+		System.out.println("user_no값이 잘 들어갔는지 확인"+commentVo);
+		
+		//부모의 정보를 가져와야함? group_no, order_no , depth
+		
+		
+		System.out.println(commentVo);
+		
+		
+		commentService.write(commentVo);
+								
+		return "redirect:/comment/list";
+
+	}
+	
 	//삭제
 	@RequestMapping(value="/remove", method= {RequestMethod.GET ,RequestMethod.POST})
 	public String remove(int no) {

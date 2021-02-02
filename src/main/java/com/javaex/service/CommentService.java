@@ -30,6 +30,14 @@ public class CommentService {
 		return commentDao.commentInsert(commentVo);
 	}
 	
+	//write(게시판 글 등록)
+	public int commentWrite(CommentVo commentVo) {
+		System.out.println("Service write");	
+		
+		
+		return commentDao.commentTowInsert(commentVo);
+	}
+	
 	//삭제
 	public int commentRemove(int no) {
 		System.out.println("Service commentRemove");	
