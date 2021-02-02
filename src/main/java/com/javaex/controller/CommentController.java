@@ -39,13 +39,22 @@ public class CommentController {
 		return "comment/list";
 	}
 
-	//글쓰기폼
+	//새글쓰기폼
 	@RequestMapping(value="/writeForm", method= {RequestMethod.GET ,RequestMethod.POST})
 	public String writeForm() {
 		System.out.println("컨트롤러 writeForm");
 			
 			
 		return "comment/writeForm";
+	}
+	
+	//댓글쓰기폼
+	@RequestMapping(value="/commentForm", method= {RequestMethod.GET ,RequestMethod.POST})
+	public String commentForm() {
+		System.out.println("컨트롤러 commentForm");
+			
+			
+		return "comment/commentForm";
 	}
 	
 	
@@ -84,7 +93,7 @@ public class CommentController {
 		System.out.println(commentVo);
 		
 		
-		commentService.write(commentVo);
+		commentService.commentWrite(commentVo);
 								
 		return "redirect:/comment/list";
 
@@ -112,6 +121,29 @@ public class CommentController {
 		
 		return "comment/read";
 	}
+	
+	//수정폼
+	@RequestMapping(value="/modifyForm", method= {RequestMethod.GET ,RequestMethod.POST})
+	public String modifyForm(@RequestParam("no") int no,
+							Model model) {
+		System.out.println("컨트롤러 modifyForm");
 		
+		
+		model.addAttribute("commentOne", commentService.modifyRead(no));
+		
+		return "comment/modifyForm";
+	}
+	
+	//수정
+	@RequestMapping(value="/modify", method= {RequestMethod.GET ,RequestMethod.POST})
+	public String modify(@ModelAttribute CommentVo commentVo) {
+		System.out.println("컨트롤러 modify");
+		System.out.println(commentVo);
+		
+		commentService.modify(commentVo);
+		
+		
+		return "redirect:/comment/list";
+	}
 
 }

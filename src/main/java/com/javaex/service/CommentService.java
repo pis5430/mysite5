@@ -30,9 +30,9 @@ public class CommentService {
 		return commentDao.commentInsert(commentVo);
 	}
 	
-	//write(게시판 글 등록)
+	//댓글 등록
 	public int commentWrite(CommentVo commentVo) {
-		System.out.println("Service write");	
+		System.out.println("Service commentowrite");	
 		
 		
 		return commentDao.commentTowInsert(commentVo);
@@ -54,6 +54,21 @@ public class CommentService {
 		return commentDao.commentOne(no);
 	}
 	
+	//수정 불러오기
+	public CommentVo modifyRead(int no) {
+		System.out.println("Service read");	
+		
+		return commentDao.commentOne(no);
+	}
 	
+	
+	
+	//수정
+	public void modify(CommentVo commentVo) {
+		System.out.println("Service modifyForm");	
+		
+		 commentDao.commentUpdate(commentVo);
+
+	}
 
 }

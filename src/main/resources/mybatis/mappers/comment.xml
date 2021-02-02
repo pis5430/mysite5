@@ -48,9 +48,9 @@
 					#{content},
 					0, 
 					sysdate,
-					#{no},
-					1,
-					0)
+					#{group_no},
+					#{order_no}+1,
+					#{depth})
 		]]>
 	</insert>
 	
@@ -63,7 +63,10 @@
 			       r.content,
 			       r.hit,
 			       to_char(r.reg_date,'YYYY-MM-DD HH24:MI') "reg_date",
-			       r.user_no
+			       r.user_no,
+			       r.group_no,
+			       r.order_no,
+			       r.depth
 			from rboard r , users u
 			where r.user_no = u.no
 			and r.no = #{no}
@@ -86,6 +89,16 @@
 			where no = #{no}	
 		]]>
 	</delete>
+	
+	<!-- 댓글 수정 -->
+	<update id="commentUpdate" parameterType="CommentVo"> 
+		<![CDATA[
+			update rboard
+			set title = #{title},
+				content = #{content}
+			where no = #{no}
+		]]>
+	</update>	
 
 
 </mapper>

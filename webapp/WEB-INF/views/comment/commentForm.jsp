@@ -47,7 +47,7 @@
 
 			<div id="board">
 				<div id="writeForm">
-					<form action="${pageContext.request.contextPath}/comment/write?no=${sessionScope.authUser.no}" method="get">
+					<form action="${pageContext.request.contextPath}/comment/commentWrite?no=${sessionScope.authUser.no}" method="get">
 						<!-- 제목 -->
 						<div class="form-group">
 							<label class="form-text" for="txt-title">제목</label> 
@@ -58,7 +58,10 @@
 						<div class="form-group">
 							<textarea id="txt-content" name="content"></textarea>
 						</div>
-
+						<input type="text" name="group_no" value="${param.group_no}">
+						<input type="text" name="order_no" value="${param.order_no}">
+						<input type="text" name="depth" value="${param.depth}">
+						
 						<a id="btn_cancel" href="${pageContext.request.contextPath}/comment/list">취소</a>
 						<button id="btn_add" type="submit">등록</button>
 
@@ -69,8 +72,8 @@
 			</div>
 			<!-- //board -->
 		</div>
-		<!-- //content  -->    0
-0		<div class="clear"></div>
+		<!-- //content  -->    
+	<div class="clear"></div>
 
 		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 		<!-- //footer -->

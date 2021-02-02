@@ -56,5 +56,12 @@ public class CommentDao {
 		
 		return sqlSession.update("comment.commentHitUpdate",no);
 	}
+	
+	//게시물 수정
+	public void commentUpdate(CommentVo commentVo) {
+		System.out.println("dao commentUpdate commentVo :"+commentVo);
+		
+		 sqlSession.update("comment.commentUpdate",commentVo);
+	}
 
 }

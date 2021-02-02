@@ -46,35 +46,35 @@
 
 			<div id="board">
 				<div id="modifyForm">
-					<form action="${pageContext.request.contextPath}/board/modify?no=${boardOne.no}" method="post">
+					<form action="${pageContext.request.contextPath}/comment/modify?no=${commentOne.no}" method="post">
 						<!-- 작성자 -->
 						<div class="form-group">
-							<span class="form-text">작성자</span> <span class="form-value">${boardOne.name}</span>
+							<span class="form-text">작성자</span> <span class="form-value">${commentOne.name}</span>
 						</div>
 
 						<!-- 조회수 -->
 						<div class="form-group">
-							<span class="form-text">조회수</span> <span class="form-value">${boardOne.hit}</span>
+							<span class="form-text">조회수</span> <span class="form-value">${commentOne.hit}</span>
 						</div>
 
 						<!-- 작성일 -->
 						<div class="form-group">
-							<span class="form-text">작성일</span> <span class="form-value">${boardOne.date}</span>
+							<span class="form-text">작성일</span> <span class="form-value">${commentOne.reg_date}</span>
 						</div>
 
 						<!-- 제목 -->
 						<div class="form-group">
-							<label class="form-text" for="txt-title">제목</label> <input type="text" id="txt-title" name="title" value="${boardOne.title}">
+							<label class="form-text" for="txt-title">제목</label> <input type="text" id="txt-title" name="title" value="${commentOne.title}">
 						</div>
 
 
 
 						<!-- 내용 -->
 						<div class="form-group">
-							<textarea id="txt-content" name="content">${boardOne.content}</textarea>
+							<textarea id="txt-content" name="content">${commentOne.content}</textarea>
 						</div>
 
-						<a id="btn_cancel" href="${pageContext.request.contextPath}/board/read?no=${boardOne.no}">취소</a>
+						<a id="btn_cancel" href="${pageContext.request.contextPath}/comment/read?no=${commentOne.no}">취소</a>
 						<button id="btn_modify" type="submit">수정</button>
 
 					</form>
