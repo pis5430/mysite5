@@ -43,4 +43,24 @@ public class UserService {
 		return userDao.modify(userVo);
 	}
 	
+	//회원가입 창 - 아이디 체크
+	public String idcheck(String id) {
+		System.out.println("userService idcheck id = " + id);
+		
+		UserVo userVo = userDao.selectOne(id);
+		
+		String result ="";
+		
+		if(userVo==null) {
+			//사용할수있는 id
+			result = "can";
+		}else {
+			//사용할수없는 id
+			result = "cant";
+		}
+		
+		return result;
+		
+	}
+	
 }

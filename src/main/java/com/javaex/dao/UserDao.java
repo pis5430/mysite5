@@ -41,5 +41,12 @@ public class UserDao {
 		
 		return sqlSession.update("user.update", userVo);
 	}
+	
+	//아이디 체크 (메소드 오버로딩)
+	public UserVo selectOne(String id) {
+		System.out.println("dao --> selectOne -- id :" + id);
+		
+		return sqlSession.selectOne("user.selectById", id);
+	}
 
 }
