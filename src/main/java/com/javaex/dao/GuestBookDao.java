@@ -38,6 +38,30 @@ public class GuestBookDao {
 	}	
 	
 	
+	//ajax 등록 (selectkey)
+	public int insertSelectKey(GuestBookVo guestBookVo) {
+		System.out.println("dao insertSelectKey guestBookVo :"+guestBookVo );
+		
+		
+		System.out.println("xml실행전 : " + guestBookVo);
+		sqlSession.insert("guest.insertSelectKey",guestBookVo); 
+		System.out.println("xml실행후 : " + guestBookVo); //no값이 추가됨
+		
+		return guestBookVo.getNo();
+		
+	}
+	
+	
+	//글 한개 가져오기
+	public GuestBookVo selectOne(int no) {
+		
+		System.out.println("dao selectOne()");
+		
+		return sqlSession.selectOne("guest.selectOne", no);
+
+		
+	}
+	
 	
 	
 }

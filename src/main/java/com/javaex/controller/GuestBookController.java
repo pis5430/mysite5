@@ -76,4 +76,16 @@ public class GuestBookController {
 
 		}
 	
+		
+	//ajsxList
+	@RequestMapping(value="/ajaxList", method= {RequestMethod.GET ,RequestMethod.POST})
+	public String ajexList(Model model){ //Model도 import
+		System.out.println("컨트롤러 ajexList");
+
+		//guestBookService.writeResultVo(guestBookVo);	
+			
+		return "/guestbook/ajaxList";
+		}	
+		
+	
 }
