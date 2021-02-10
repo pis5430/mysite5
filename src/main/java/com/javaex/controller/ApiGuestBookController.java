@@ -46,6 +46,37 @@ public class ApiGuestBookController {
 		return vo;
 	}
 	
+	//글작성
+	@ResponseBody
+	@RequestMapping(value = "/write2")
+	public GuestBookVo write2(@ModelAttribute GuestBookVo guestBookVo) {
+		
+		System.out.println("ApiGuestBookController/write");
+		System.out.println(guestBookVo);
+		
+		//guestBookService.add(guestBookVo); //인서트, 저장됨
+		
+		//입력된 vo전달하고 저장vo를 받아야함
+		GuestBookVo vo = guestBookService.writeResultVo(guestBookVo);//인서트 기능
+		
+		
+		return vo;
+	}
+	
+	//글삭제
+	@ResponseBody
+	@RequestMapping(value = "/delete")
+	public int guestDelete(@ModelAttribute GuestBookVo guestBookVo) {
+		
+		System.out.println("ApiGuestBookController/delete");
+		System.out.println(guestBookVo);
+		
+		int count = guestBookService.delete(guestBookVo); //삭제
+
+		
+		return count; //삭제
+	}
+	
 	
 	
 	
