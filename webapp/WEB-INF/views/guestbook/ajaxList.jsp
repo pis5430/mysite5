@@ -44,7 +44,7 @@
             <!-- //content-head -->
 
 			<div id="guestbook">
-				<form action="${pageContext.request.contextPath}/api/guest/write2" method="post">
+				<!--<form action="${pageContext.request.contextPath}/api/guest/write2" method="post"> -->
 					<table id="guestAdd">
 						<colgroup>
 							<col style="width: 70px;">
@@ -71,7 +71,7 @@
 					<!-- //guestWrite -->
 					<input type="hidden" name="action" value="add">
 					
-				</form>
+				<!-- </form> -->
 				
 				
 				<div id="guestbookListArea">
@@ -127,11 +127,7 @@
 		
 		//리스트 출력
 		fetchList();	
-		
-		
 	});
-	
-	
 	
 	//삭제버튼 클릭할때 --> 비밀번호 입력창 호출
 	$("#guestbookListArea").on("click" , "a", function(){
@@ -148,30 +144,28 @@
 		
 		//모달창 호출
 		$("#delModal").modal();
-			  
-			
+			  	
 	});
 	
 	
 	//모달창 삭제버튼 클릭
 	$("#modalBtnDel").on("click" , function(){
-		console.log("모달창 삭제버튼 클릭")		
+		console.log("모달창 삭제버튼 클릭")	
 		
-		
+			
 		//모달창 비밀번호, no수집
-		var gueatBookVo = {
+		var guestBookVo = {
 			password : $("#modalPassword").val(),
 			no : $("#modalNo").val()
 		}
-		
-		
+				
 		//ajax 삭제오쳥
 		$.ajax({
 		//보낼때
 			url : "${pageContext.request.contextPath }/api/guest/delete",		
 			type : "post",
 			//contentType : "application/json",
-			data : gueatBookVo,
+			data : guestBookVo,
 	
 			//받을때
 			dataType : "json",
@@ -183,7 +177,7 @@
 					//count == 1 --> 삭제작업				
 					$("#delModal").modal("hide"); //모달창 닫기				
 					//no 테이블(글) 안보이도록 처리
-					$("#t-"+no).remove();
+					$("#t-"+guestBookVo.no).remove();
 					
 				}else{
 					alert("비밀번호가 틀렸습니다.");
@@ -194,11 +188,8 @@
 				console.error(status + " : " + error);
 			}
 		});
-		
 	
-		
 	});
-
 
 
 
@@ -282,9 +273,7 @@
 			$("#guestbookListArea").prepend(str);
 		}else{
 			console.log("방향 미지정");
-		}
-		
-		
+		}		
 		
 	}
 	
@@ -314,12 +303,8 @@
 				console.error(status + " : " + error);
 			}
 		});
-
-		
 	}
 
 </script>
-
-
 
 </html>
