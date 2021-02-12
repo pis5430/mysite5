@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,7 +30,7 @@ public class ApiGuestBookController {
 	}
 	
 	
-	//글작성
+	//글작성(ajax)
 	@ResponseBody
 	@RequestMapping(value = "/write")
 	public GuestBookVo write(@ModelAttribute GuestBookVo guestBookVo) {
@@ -46,12 +47,13 @@ public class ApiGuestBookController {
 		return vo;
 	}
 	
-	//글작성
+	//글작성(ajax-json)
 	@ResponseBody
 	@RequestMapping(value = "/write2")
-	public GuestBookVo write2(@ModelAttribute GuestBookVo guestBookVo) {
+	public GuestBookVo write2(@RequestBody GuestBookVo guestBookVo) { //body에 있는 데이터를 받아줌 
+		//@ModelAttribute 와 @RequestBody 를 구분해서 잘 써야함 
 		
-		System.out.println("ApiGuestBookController/write");
+		System.out.println("ApiGuestBookController/write2");
 		System.out.println(guestBookVo);
 		
 		//guestBookService.add(guestBookVo); //인서트, 저장됨

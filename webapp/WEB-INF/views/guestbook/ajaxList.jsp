@@ -202,7 +202,7 @@
 
 
 
-
+	//방명록 등록버튼 클릭할때 
 	$("#btnSubmit").on("click" , function(){
 		console.log("방명록 등록버튼 클릭");
 		
@@ -213,14 +213,16 @@
 			content : $("[name='content']").val()
 		};
 		
-		//ajax방식으로 요청 (저장)
+		//console.log(guestBookVo);
 		
+		//ajax방식으로 요청 (저장) , json으로 요청하는 법 (contentType씀)	
 		$.ajax({
 			//보낼때
-			url : "${pageContext.request.contextPath}/api/guest/write",		
+			url : "${pageContext.request.contextPath}/api/guest/write2", //json방식	 
+			//url : "${pageContext.request.contextPath}/api/guest/write",
 			type : "post",
-			//contentType : "application/json",
-			data : guestBookVo, //링크 뒤에 붙는 정보를 date에 넣어줌
+			contentType : "application/json", //json으로 보낼때 사용
+			data : JSON.stringify(guestBookVo), //링크 뒤에 붙는 정보를 date에 넣어줌 , JSON.stringify() json으로 변환,
 
 			//받을때
 			dataType : "json",
@@ -243,8 +245,6 @@
 			}
 		});
 
-		
-		
 	});
 	
 	

@@ -11,7 +11,7 @@
 
 	<div id="header">
 		<h1>
-			<a href="${pageContext.request.contextPath}/">MySite</a>
+			<a href="${pageContext.request.contextPath}">MySite</a>
 		</h1>
 
 		<c:choose>
@@ -33,7 +33,7 @@
 
 	<div id="nav">
 		<ul>
-			<li><a href="${pageContext.request.contextPath}/gueat/addList">방명록</a></li>
+			<li><a href="${pageContext.request.contextPath}/guest/addList">방명록</a></li>
 			<li><a href="">갤러리</a></li>
 			<li><a href="${pageContext.request.contextPath}/board/list">게시판</a></li>
 			<li><a href="">입사지원서</a></li>
