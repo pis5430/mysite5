@@ -44,7 +44,7 @@
             <!-- //content-head -->
 
 			<div id="guestbook">
-				<!-- <form action="${pageContext.request.contextPath}/api/guest/write" method="post"> -->
+				<form action="${pageContext.request.contextPath}/api/guest/write2" method="post">
 					<table id="guestAdd">
 						<colgroup>
 							<col style="width: 70px;">
@@ -54,9 +54,9 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<th><label class="form-text" for="input-uname">이름</label></td>
+								<th><label class="form-text" for="input-uname">이름</label></th>
 								<td><input id="input-uname" type="text" name="name"></td>
-								<th><label class="form-text" for="input-pass">패스워드</label></td>
+								<th><label class="form-text" for="input-pass">패스워드</label></th>
 								<td><input id="input-pass"type="password" name="pass"></td>
 							</tr>
 							<tr>
@@ -71,7 +71,7 @@
 					<!-- //guestWrite -->
 					<input type="hidden" name="action" value="add">
 					
-				<!--</form> -->
+				</form>
 				
 				
 				<div id="guestbookListArea">
