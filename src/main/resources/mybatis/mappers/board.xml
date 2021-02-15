@@ -15,8 +15,78 @@
 			       b.user_no
 			from board b , users u
 			where b.user_no = u.no
-			order by b.reg_date desc
+			order by no desc
 		]]>
+	</select>
+	
+	<!-- 글전체 가져오기 (검색어) -->
+	<select id="boardList2" parameterType="string"  resultType="BoardVo">
+		<![CDATA[
+			select b.no,
+			       b.title,
+			       u.name,
+			       b.content,
+			       b.hit,
+			       to_char(b.reg_date,'YYYY-MM-DD HH24:MI') "date",
+			       b.user_no
+			from board b , users u
+			where b.user_no = u.no
+		]]>
+			<if test="  value != null and value !=''  ">
+				and b.title like '%' || #{keyword} || '%'
+			</if>
+		<![CDATA[	
+			order by no desc
+		]]>
+	</select>
+	
+		<!-- 글전체 가져오기 (검색어) + 페이징 기능 추가 -->
+	<select id="boardList3" parameterType="map"  resultType="BoardVo">
+		<![CDATA[
+			select r.rnum,
+			       r.no,
+			       r.title,
+			       r."date",
+			       r.user_no,
+			       r.name
+			from (select rownum rnum,
+			             o.no,
+			             o.title,
+			             o."date",
+			             o.user_no,
+			             o.name
+			      from (select b.no,
+			                   b.title,
+			                   u.name,
+			                   b.content,
+			                   b.hit,
+			                   to_char(b.reg_date,'YYYY-MM-DD HH24:MI') "date",
+			                   b.user_no
+			              from board b , users u
+			              where b.user_no = u.no
+		 ]]>
+						<if test="  keyword != null and keyword !=''  ">
+							and title like '%'||#{keyword}||'%'
+						</if>
+		<![CDATA[	
+
+			              order by no desc) o) r
+			where r.rnum >= #{startRNum}
+			and r.rnum <= #{endRNum}
+		]]>
+	</select>
+	
+	
+	<!-- 전체 글 갯수 가져오기 :selectToTalCnt -->
+	<select id="selectToTalCnt" parameterType="string" resultType="int">
+		<![CDATA[	
+			select count(*)
+			from board b , users u
+			 where b.user_no = u.no
+		]]>
+			<if test="  value != null and value !=''  ">
+				and title like '%'||#{keyword}||'%'
+			</if>
 	</select>
 	
 	<insert id="boardInsert" parameterType="BoardVo">

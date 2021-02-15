@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,6 +30,7 @@ public class BoardController {
 	
 	//일반메소드
 	
+	//리스트만 출력
 	@RequestMapping(value="/list", method= {RequestMethod.GET ,RequestMethod.POST})
 	public String list(Model model) {
 		System.out.println("컨트롤러 list");
@@ -41,6 +43,36 @@ public class BoardController {
 		
 		return "board/list";
 	}
+	
+	//리스트 출력하면서 검색기능까지 있는것
+	@RequestMapping(value="/list2", method= {RequestMethod.GET ,RequestMethod.POST})
+	public String list2(@RequestParam( value ="keyword", required=false, defaultValue="") String keyword , Model model) {
+		System.out.println("컨트롤러 list2 검색기능까지 추가된 list");
+		//System.out.println("keyword : " + keyword);
+		
+		List<BoardVo> boardList = boardService.boardList2(keyword);
+		model.addAttribute("bList", boardList);
+		
+		return "board/list2";
+	}
+	
+	//리스트 출력하면서 검색기능까지 있는것, + 페이징 기능까지 추가
+	@RequestMapping(value="/list3", method= {RequestMethod.GET ,RequestMethod.POST})
+	public String list3(@RequestParam( value ="keyword", required=false, defaultValue="") String keyword , Model model,
+						@RequestParam( value ="crtPage", required=false, defaultValue="1") int crtPage ) {
+		System.out.println("컨트롤러 list3 검색기능까지 추가된 list");
+		System.out.println("keyword : " + keyword);
+		System.out.println("crtPage : " + crtPage); //페이지 번호
+		
+		Map<String , Object> pMap = boardService.boardList3(keyword, crtPage);
+		System.out.println(pMap);
+		
+		model.addAttribute("pMap", pMap);
+		
+		return "board/list3";
+	}
+	
+	
 	
 	//글쓰기폼
 	@RequestMapping(value="/writeForm", method= {RequestMethod.GET ,RequestMethod.POST})
@@ -68,6 +100,8 @@ public class BoardController {
 		return "redirect:/board/list";
 
 	}
+	
+	
 		
 		
 	
