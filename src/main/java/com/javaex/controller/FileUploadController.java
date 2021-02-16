@@ -29,8 +29,8 @@ public class FileUploadController {
 	public String upload(@RequestParam("file") MultipartFile file , Model model) {
 		System.out.println("파일 업로드");
 		
-		//System.out.println(file.getOriginalFilename());
-		//System.out.println(file.getSize());
+		System.out.println(file.getOriginalFilename());
+		System.out.println(file.getSize());
 	 	String saveName = fileUploadService.restore(file);
 		model.addAttribute("saveName",saveName);
 	 	

@@ -48,19 +48,19 @@
 			<div id="gallery">
 				<div id="list">
 			
-					
+					<c:if test="${authUser != null }">
 						<button id="btnImgUpload">이미지올리기</button>
 						<div class="clear"></div>
-
-			
+					</c:if>
+				
 					<ul id="viewArea">
 						
 						<!-- 이미지반복영역 -->
 						<c:forEach items="${gList}" var="vo">
 							<li>
 								<div class="view" >
-									<img class="imgItem" src="${pageContext.request.contextPath}/upload/${vo.saveName}">
-									<div class="imgWriter">작성자: <strong>유재석</strong></div>
+									<img class="imgItem" src="${pageContext.request.contextPath}/upload/${saveName}">
+									<div class="imgWriter">작성자: <strong>${vo.name}</strong></div>
 								</div>
 							</li>
 						</c:forEach>	
@@ -93,15 +93,15 @@
 					<h4 class="modal-title">이미지등록</h4>
 				</div>
 				
-				<form method="" action="" >
+				<form method="post" action="${pageContext.request.contextPath}/gallery/upload" enctype="multipart/form-data">
 					<div class="modal-body">
 						<div class="form-group">
 							<label class="form-text">글작성</label>
-							<input id="addModalContent" type="text" name="" value="" >
+							<input id="addModalContent" type="text" name="content" value="" >
 						</div>
 						<div class="form-group">
 							<label class="form-text">이미지선택</label>
-							<input id="file" type="file" name="" value="" >
+							<input id="file" type="file" name="file" value="" >
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -127,7 +127,7 @@
 				<div class="modal-body">
 					
 					<div class="formgroup" >
-						<img id="viewModelImg" src =""> <!-- ajax로 처리 : 이미지출력 위치-->
+						<img id="viewModelImg" src ="${pageContext.request.contextPath}/upload/${saveName}"> <!-- ajax로 처리 : 이미지출력 위치-->
 					</div>
 					
 					<div class="formgroup">
