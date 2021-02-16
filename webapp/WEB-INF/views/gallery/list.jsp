@@ -59,7 +59,7 @@
 						<c:forEach items="${gList}" var="vo">
 							<li>
 								<div class="view" >
-									<img class="imgItem" src="${pageContext.request.contextPath}/upload/${saveName}">
+									<img class="imgItem" src="${pageContext.request.contextPath}/upload/${vo.saveName}">
 									<div class="imgWriter">작성자: <strong>${vo.name}</strong></div>
 								</div>
 							</li>
@@ -127,7 +127,7 @@
 				<div class="modal-body">
 					
 					<div class="formgroup" >
-						<img id="viewModelImg" src ="${pageContext.request.contextPath}/upload/${saveName}"> <!-- ajax로 처리 : 이미지출력 위치-->
+						<img id="viewModelImg" src ="${pageContext.request.contextPath}/upload/${vo.saveName}"> <!-- ajax로 처리 : 이미지출력 위치-->
 					</div>
 					
 					<div class="formgroup">

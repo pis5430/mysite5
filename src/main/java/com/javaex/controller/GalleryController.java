@@ -56,8 +56,8 @@ public class GalleryController {
 		
 		System.out.println("컨트롤러 vo확인"+galleryVo);
 		
-	 	String saveName = galleryService.restore(file , galleryVo);
-		model.addAttribute("saveName",saveName);
+	 	//String saveName = galleryService.restore(file , galleryVo);
+		//model.addAttribute("saveName",saveName);
 	 	
 		return "redirect:/gallery/list";
 	}
