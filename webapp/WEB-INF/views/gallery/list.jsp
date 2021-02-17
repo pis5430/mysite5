@@ -196,7 +196,7 @@
 				console.log(galleryVo);
 				console.log(galleryVo.no);
 				console.log(galleryVo.name);
-				console.log(galleryVo.sameName);
+				console.log(galleryVo.saveName); //
 				
 				// src에 가져온 데이터 넣어주기
 				$("#viewModelImg").attr("src", "${pageContext.request.contextPath}/upload/" + galleryVo.saveName);
