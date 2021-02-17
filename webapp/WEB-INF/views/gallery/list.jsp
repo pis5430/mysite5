@@ -57,8 +57,8 @@
 						
 						<!-- 이미지반복영역 -->
 						<c:forEach items="${gList}" var="vo">
-							<li>
-								<div class="view" id="viewDiv" data-no="${vo.no}" data-userno="${vo.user_no}" >
+							<li id="viewDiv" data-no="${vo.no}" data-userno="${vo.user_no}" >
+								<div class="view">
 									<img name="imgView" class="imgItem" src="${pageContext.request.contextPath}/upload/${vo.saveName}">
 									<div class="imgWriter">작성자: <strong>${vo.name}</strong></div>
 								</div>
@@ -172,7 +172,7 @@
 	});
 	
 	//이미지 박스를 클릭햇을때 
-	$("#viewDiv").on("click" , function(){
+	$("#viewArea").on("click", "li", function(){
 		console.log("이미지 보기 모달 창 호출");
 		
 		//파일 데이터 수집
