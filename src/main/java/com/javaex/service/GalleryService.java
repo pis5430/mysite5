@@ -95,5 +95,15 @@ public class GalleryService {
 		
 		return galleryDao.selectOne(no);
 	}
+	
+	//갤러리 1개 삭제하기
+	public int galleryDelete(int no) {
+		System.out.println("service galleryDelete no -->" + no);
+		
+		return galleryDao.galleryDelete(no);
+	}
+	
+	
+	
 
 }

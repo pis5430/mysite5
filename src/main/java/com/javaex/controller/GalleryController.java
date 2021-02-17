@@ -75,6 +75,20 @@ public class GalleryController {
 		return galleryVo ;
 	}
 	
+	
+	//갤러리 삭제
+	@ResponseBody
+	@RequestMapping(value="/delete", method= {RequestMethod.GET, RequestMethod.POST})
+	public int galleryDelete(@RequestParam("no") int no) {
+		System.out.println("컨트롤러 galleryDelete 이미지 1개 삭제 no : " + no);
+		
+		//삭제
+		int count = galleryService.galleryDelete(no);
+		
+		return count;
+	}
+	
+	
 
 	
 	

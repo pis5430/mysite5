@@ -141,7 +141,10 @@
 				<form method="" action="">
 					<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
+					<!-- 삭제버튼은 로그인한 사람에게만 보이도록(작성자에게만 보이도록 수정해야함 ) -->
+					<c:if test="${authUser != null }">
+						<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
+					</c:if>
 				</div>
 				
 				
@@ -222,16 +225,41 @@
 		
 	});
 	
-	
-	//갤러리 클릭 후 모달창으로 보기  + html조합하여 화면에 출력
-	function render(fileName){
+
+	//삭제 버튼 클릭시
+	$(".modal-footer").on("click", "#btnDel", function(){
+		console.log("갤러리 삭제버큰");
 		
-		//문자열로 만듬 , 소문자만 인식가능 ""안에
-		var str = "";
-		str += "<img class='imgItem' src='${pageContext.request.contextPath}/upload/"+fileName+">";
+		var no = $("#modalNo").val();
+		console.log(no);
 		
+		//이미지 삭제
+		$.ajax({
+			
+			url : "${pageContext.request.contextPath}/gallery/delete",		
+			type : "post",
+			//contentType : "application/json",
+			data : {no : no},
+			
+			dataType : "json",
+			success : function(count){
+				/*성공시 처리해야될 코드 작성*/
+				if(count == 1) {
+					
+					//삭제 성공시 모달창 닫기
+					$("#viewModal").hide();
+					
+					//갤러리 리스트에서 삭제
+					$("#viewDiv").remove();
+				}
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+			
+		});
 		
-	}
+	});
 
 
 

@@ -34,5 +34,12 @@ public class GalleryDao {
 		
 		return sqlSession.selectOne("gallery.gallerySelectOne", no);
 	}
+	
+	//갤러리 글 1개 삭제하기
+	public int galleryDelete(int no) {
+		System.out.println("dao galleryDelete no :" + no);
+		
+		return sqlSession.delete("gallery.galleryDelete", no);
+	}
 
 }
