@@ -27,5 +27,12 @@ public class GalleryDao {
 		System.out.println("dao insert galleryVo :" + galleryVo);
 		sqlSession.insert("gallery.galleryInsert", galleryVo);
 	}
+	
+	//갤러리 글 하나만 조회하기
+	public GalleryVo selectOne(int no) {
+		System.out.println("dao selectOne no :" + no);
+		
+		return sqlSession.selectOne("gallery.gallerySelectOne", no);
+	}
 
 }

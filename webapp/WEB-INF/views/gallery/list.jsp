@@ -58,8 +58,8 @@
 						<!-- 이미지반복영역 -->
 						<c:forEach items="${gList}" var="vo">
 							<li>
-								<div class="view" >
-									<img class="imgItem" src="${pageContext.request.contextPath}/upload/${vo.saveName}">
+								<div class="view" id="viewDiv" data-no="${vo.no}" data-userno="${vo.user_no}" >
+									<img name="imgView" class="imgItem" src="${pageContext.request.contextPath}/upload/${vo.saveName}">
 									<div class="imgWriter">작성자: <strong>${vo.name}</strong></div>
 								</div>
 							</li>
@@ -127,12 +127,15 @@
 				<div class="modal-body">
 					
 					<div class="formgroup" >
-						<img id="viewModelImg" src ="${pageContext.request.contextPath}/upload/${vo.saveName}"> <!-- ajax로 처리 : 이미지출력 위치-->
+						<img id="viewModelImg" src ="">
+						 <!-- ajax로 처리 : 이미지출력 위치-->
 					</div>
 					
 					<div class="formgroup">
 						<p id="viewModelContent"></p>
 					</div>
+					
+					<input id="modalNo" type="hidden" name="gallery_no" value="">
 					
 				</div>
 				<form method="" action="">
@@ -157,21 +160,78 @@
 	$("#btnImgUpload").on("click" , function(){
 		console.log("이미지 올리기 모달 창 호출");
 		
+		//글작성 필드 초기화
+		$("#addModalContent").val("");
+		
+		//파일업로드 초기화
+		$("#file").val("");
+		
 		//모달창 호출
 		$("#addModal").modal();		
 		
-		
 	});
 	
-	
-	$(".view").on("click" , function(){
+	//이미지 박스를 클릭햇을때 
+	$("#viewDiv").on("click" , function(){
 		console.log("이미지 보기 모달 창 호출");
 		
+		//파일 데이터 수집
+		var no = $(this).data("no")
+		
+		//ajax방식으로 요청 
+		$.ajax({
+			//보낼때
+			url : "${pageContext.request.contextPath}/gallery/view", 	 
+			//url : "${pageContext.request.contextPath}/api/guest/write",
+			type : "post",
+			//contentType : "application/json", //json으로 보낼때 사용
+			data : {no : no}, //링크 뒤에 붙는 정보를 date에 넣어줌 , JSON.stringify() json으로 변환,
+
+			//받을때
+			dataType : "json",
+			success : function(galleryVo){
+				/*성공시 처리해야될 코드 작성*/
+				
+				//확인
+				console.log(galleryVo);
+				console.log(galleryVo.no);
+				console.log(galleryVo.name);
+				console.log(galleryVo.sameName);
+				
+				// src에 가져온 데이터 넣어주기
+				$("#viewModelImg").attr("src", "${pageContext.request.contextPath}/upload/" + galleryVo.saveName);
+				
+				//content 넣어주기
+				$("#viewModelContent").html(galleryVo.content);
+				
+				//no값 넣어주기
+				$("#modalNo").attr("value", galleryVo.no);		
+				
+			},
+			
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+			
+		});
+		
 		//모달창 호출
-		$("#viewModal").modal();		
+		$("#viewModal").modal();
+			
 		
 		
 	});
+	
+	
+	//갤러리 클릭 후 모달창으로 보기  + html조합하여 화면에 출력
+	function render(fileName){
+		
+		//문자열로 만듬 , 소문자만 인식가능 ""안에
+		var str = "";
+		str += "<img class='imgItem' src='${pageContext.request.contextPath}/upload/"+fileName+">";
+		
+		
+	}
 
 
 

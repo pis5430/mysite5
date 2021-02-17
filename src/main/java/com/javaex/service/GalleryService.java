@@ -28,6 +28,7 @@ public class GalleryService {
 	}
 	
 	
+	//갤러리 등록
 	public String restore(MultipartFile file , GalleryVo galleryVo) {
 		System.out.println("GalleryService.restore()");
 		System.out.println(file.getOriginalFilename());
@@ -85,6 +86,14 @@ public class GalleryService {
 		
 		return saveName;
 		
+	}
+	
+	
+	//갤러리 이미지 1개 불러오기
+	public GalleryVo gallerySelectOne(int no) {
+		System.out.println("service gallerySelectOne no -->" + no);
+		
+		return galleryDao.selectOne(no);
 	}
 
 }

@@ -36,5 +36,30 @@
 	</insert>
 
 
+	<!-- 갤러리 하나 조회하기 -->
+	<select id="gallerySelectOne" parameterType="int" resultType="com.javaex.vo.GalleryVo">
+		<![CDATA[
+			select  g.no,
+			        g.user_no as userNo,
+			        u.name,
+			        g.content,
+			        g.filePath,
+			        g.orgName,
+			        g.saveName,
+			        g.fileSize
+			from gallery g, users u
+			where g.user_no = u.no
+			and g.no = #{no}
+			order by no desc
+		]]>
+	</select>
+	
+	<!-- 갤러리 하나 삭제 -->
+	<delete id="galleryDelete" parameterType="int">
+		<![CDATA[
+			delete from gallery
+			where no = #{no}
+		]]>
+	</delete>
 
 </mapper>

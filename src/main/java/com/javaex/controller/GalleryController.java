@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.GalleryService;
@@ -60,6 +61,18 @@ public class GalleryController {
 		//model.addAttribute("saveName",saveName);
 	 	
 		return "redirect:/gallery/list";
+	}
+	
+	//갤러리 이미지 1개만 불러오기
+	@ResponseBody
+	@RequestMapping(value="/view", method= {RequestMethod.GET, RequestMethod.POST})
+	public GalleryVo view(@RequestParam("no") int no) {
+		System.out.println("컨트롤러 view 이미지 1개 불러오기 no : " + no);
+
+		GalleryVo galleryVo = galleryService.gallerySelectOne(no);
+		System.out.println(galleryVo );
+		
+		return galleryVo ;
 	}
 	
 
