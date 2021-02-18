@@ -135,14 +135,17 @@
 						<p id="viewModelContent"></p>
 					</div>
 					
-					<input id="modalNo" type="hidden" name="gallery_no" value="">
+					<input id="modalNo" type="text" name="gallery_no" value="">
+					<input id="modalUserNo" type="text" name="gallery_userno" value="">
+					<input id="sessionNo" type="text" name="userno" value="${authUser.no}">
 					
 				</div>
 				<form method="" action="">
 					<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<!-- 삭제버튼은 로그인한 사람에게만 보이도록(작성자에게만 보이도록 수정해야함 ) -->
-					<c:if test="${authUser != null }">
+					<!-- 삭제버튼은 로그인한 사람에게만 보이도록(작성자에게만 보이도록 수정해야함 )
+					 authUser.no 와 user_no를 비교해야함-->
+					<c:if test="${authUser != null}">
 						<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
 					</c:if>
 				</div>
@@ -180,6 +183,11 @@
 		
 		//파일 데이터 수집
 		var no = $(this).data("no")
+		var user_no = $(this).data("userno") //삭제버튼 관련
+		
+		
+		
+		console.log("no :" + no + " user_no :" +user_no);
 		
 		//ajax방식으로 요청 
 		$.ajax({
@@ -188,7 +196,7 @@
 			//url : "${pageContext.request.contextPath}/api/guest/write",
 			type : "post",
 			//contentType : "application/json", //json으로 보낼때 사용
-			data : {no : no}, //링크 뒤에 붙는 정보를 date에 넣어줌 , JSON.stringify() json으로 변환,
+			data : {no : no , user_no : user_no}, //링크 뒤에 붙는 정보를 date에 넣어줌 , JSON.stringify() json으로 변환,
 
 			//받을때
 			dataType : "json",
@@ -199,7 +207,8 @@
 				console.log(galleryVo);
 				console.log(galleryVo.no);
 				console.log(galleryVo.name);
-				console.log(galleryVo.saveName); //
+				console.log(galleryVo.saveName); 
+				console.log(user_no)//
 				
 				// src에 가져온 데이터 넣어주기
 				$("#viewModelImg").attr("src", "${pageContext.request.contextPath}/upload/" + galleryVo.saveName);
@@ -208,7 +217,10 @@
 				$("#viewModelContent").html(galleryVo.content);
 				
 				//no값 넣어주기
-				$("#modalNo").attr("value", galleryVo.no);		
+				$("#modalNo").attr("value", galleryVo.no);	
+				
+				//userNo값 넣어주기
+				$("#modalUserNo").attr("value", user_no);	
 				
 			},
 			
@@ -231,6 +243,7 @@
 		console.log("갤러리 삭제버큰");
 		
 		var no = $("#modalNo").val();
+		
 		console.log(no);
 		
 		//이미지 삭제
